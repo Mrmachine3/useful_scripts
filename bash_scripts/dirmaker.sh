@@ -21,28 +21,35 @@ echo -n "Enter name of your base directory: "
 read BASE
 
 if [[ -d $BASE ]] 
-then
-	cd $BASE && echo -n "Enter academic year (YYYY): "
-	read YEAR
-else
-	if [[ -d $YEAR ]] 
 	then
-		cd $YEAR && echo -n "Enter academic quarter ({WQ/SQ/FQ}YY): "
-		read QTR
+		cd $BASE && echo -n "Enter academic year (YYYY): " && read YEAR
 	else
-		if [[ -d $QTR ]]
-		then 
-			cd $QTR && echo -n "Enter course # (example TDC-411): " 
-			read COURSE; sleep 1 && echo -n "Enter course title: " && read TITLE; sleep 1
-			cd $COURSE
-		else
-			echo "Creating $BASE directory tree structure..." && mkdir $BASE && cd $BASE
-			echo -n "Enter academic year: " && read YEAR && mkdir $YEAR && cd $YEAR
-			echo -n "Enter academic quarter ({WQ/SQ/FQ}YY): " && read QTR && mkdir $QTR && cd $QTR
-			echo -n "Enter course # (example TDC-411): " && read COURSE && mkdir $COURSE && cd $COURSE
-			echo -n "Enter course title: " && read TITLE
-		fi;
-	fi;
+		echo "Creating $BASE directory tree structure..." && mkdir $BASE && cd $BASE
+fi;
+
+if [[ -d $YEAR ]] 
+	then
+		cd $YEAR && echo -n "Enter academic quarter ({WQ/SQ/FQ}YY): " && read QTR
+	else
+		echo -n "Enter academic year: " && read YEAR && mkdir $YEAR && cd $YEAR
+fi;
+
+if [[ -d $QTR ]]
+	then 
+		cd $QTR && echo -n "Enter course # (example TDC-411): " && read COURSE 
+	else
+		mkdir $QTR && cd $QTR
+fi;
+
+if [[ -d $COURSE ]]
+	then
+		cd $COURSE && echo "$COURSE directory already exists" && sleep 1 && tree -aC $PWD && sleep 2
+		exit 1
+	else
+		mkdir $COURSE && cd $COURSE
+		echo -n "Enter course title: " && read TITLE
+#		echo "Your degree is not a race. One class as a time." && sleep 1 
+#		exit 1
 fi;
 
 # Defining directory filepath
@@ -95,7 +102,7 @@ function ProgressBar {
 # Proof of concept
 for number in $(seq ${_start} ${_end})
 	do
-		sleep 0.05
+		sleep 0.005
 		ProgressBar ${number} ${_end}
 	done
 
@@ -105,7 +112,7 @@ export NEWTREE=$PWD
 echo " " && sleep 1
 tree -aC $NEWTREE
 
-printf "\nFinished...dirmaker.sh script completed successfully!\n"
+printf "\nFinished...$0 script completed successfully!\n"
 echo "The $BASE directory tree was created on $today"
 echo " "
 

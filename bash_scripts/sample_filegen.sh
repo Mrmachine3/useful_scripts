@@ -7,6 +7,7 @@
 # sample text to all files
 # Author: Mr. Machine
 # Tags: utility, bash
+# Resources: https://www.mockaroo.com/ was used to generate random sample data
 ########################################################################### 
 
 # Args
