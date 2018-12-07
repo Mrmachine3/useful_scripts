@@ -30,11 +30,11 @@ outputfname = input("Enter name of consolidation file, include file extention: "
 # Open output filename in write mode
 with open(outputfname, "w") as output:
 # Iterate over each file in glob search results
-for fname in glob(inputfname):
+	for fname in glob(inputfname):
 # Print stdout message to terminal indicating addition of fname contents to output file
     print("Adding " + fname + " to " + outputfname)
-    f = open(fname)
-    lines = f.readlines()[1:]
-    output.write(lines)
-    f.close()
+	    f = open(fname)
+	    lines = f.readlines()[1:]
+	    output.write(lines)
+	    f.close()
 output.close()
