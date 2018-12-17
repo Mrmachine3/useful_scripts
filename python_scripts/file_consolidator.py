@@ -12,29 +12,50 @@
 
 # Library imports
 import os
-from glob import glob
+import glob
+import sys
+
+# Define variables/arguements
+ext=sys.argv[1]
+outputfname=sys.argv[2]
 
 # Define the current working directory
-dir_path = input("Enter current working directory file path: ")
+dir_path = os.getcwd() + "/*" + ext
+# print(dir_path)
 
-# Define the type of file extension you are looking to consolidate
-# ---> consider refactoring to only allow .csv, .txt, .xls, .xlsx
-ext = input("Enter common file extension for files requiring consolidation: ")
+print 'Current directory files:'
+for name in glob.glob(dir_path):
+    print '\t', name
+print ''
 
-# Defines search string to pass into glob function denoted by a wildcard character (*) and file extension
-inputfname = "*"+ext 
+read_files = glob.glob("*" + ext)
+outputfname = "master_consolidated.csv"
 
-# Define the name of the final output file including the file extension
-outputfname = input("Enter name of consolidation file, include file extention: ")
-
+with open(outputfname, 'w'):
+    for f in read_files:
+        with open(f, 'r'):
+            flines= f.readlines()
+            for line in flines:
+                print(line,)
+            f.close()
+'''
 # Open output filename in write mode
-with open(outputfname, "w") as output:
-# Iterate over each file in glob search results
-	for fname in glob(inputfname):
-# Print stdout message to terminal indicating addition of fname contents to output file
-    print("Adding " + fname + " to " + outputfname)
-	    f = open(fname)
-	    lines = f.readlines()[1:]
-	    output.write(lines)
-	    f.close()
-output.close()
+with open(outputfname, 'a'):
+    # Iterate over each file in glob search results
+    for f in read_files:
+        # Print stdout message to terminal indicating addition of fname contents to output file
+        print("Adding " + f + " data to " + outputfname)
+        # Open individual files and read
+        with open(f, 'r'):
+            # Read first line of file, presumably a header row, and skip to next line
+            # For each subsequent line in file, read lines and append to outputfname
+            f.read()
+            for line in f:
+                print line
+#                f.write(outputfname)
+            f.close()
+outputfname.close()
+'''
+
+# Print stdout message to terminal indicating completion of script
+print("file_consolidator.py script ran successfully")
