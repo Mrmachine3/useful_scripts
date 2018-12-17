@@ -70,7 +70,7 @@ head -n 1 ./*$1 | tail -q -n 1 > $MASTER
 sleep 2
 echo "Analyzing directory files matching the $1 file extension..."
 echo ""
-echo "Total line count for all files in directory:"
+echo "Total line count for all files in directory (pre-consolidation):"
 for file in pwd; do wc -l ./*$1 | grep -v total; done
 sleep 3 
 
@@ -80,7 +80,7 @@ tail -q -n +2 ./*$1 >> $MASTER
 sleep 4 
 
 # Display line counts for all files in directory
-echo "Total line count for all files in directory:"
+echo "Total line count for all files in directory (post-consolidation):"
 for file in pwd; do wc -l ./*$1 | grep -v total; done
 sleep 2
 echo ""
