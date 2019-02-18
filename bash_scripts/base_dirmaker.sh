@@ -66,7 +66,7 @@ echo "Creating homework sub-folder in $COURSE folder..." & mkdir homework & slee
 # Create subdirectories in notes subfolder
 echo "Creating flashcards and images sub-folders in $COURSE/notes folder..." & cd notes & sleep $ZZZ & mkdir flashcards & mkdir images
 touch classnotes_"$todaynotes".md 
-sleep $ZZZ & cd $DESK/$BASE & sleep $ZZZ
+sleep $ZZZ & cd $DESK/SCHOOL/$BASE & sleep $ZZZ
 echo " "
 # Display progress bar 
 function ProgressBar {
@@ -95,7 +95,7 @@ for number in $(seq ${_start} ${_end})
 	done
 
 # command line feedback on directory tree generation
-cd ~/Desktop/$BASE
+cd ~/Desktop/SCHOOL/$BASE
 export NEWTREE=$PWD
 echo " " && sleep $ZZZ
 tree -aC $NEWTREE
