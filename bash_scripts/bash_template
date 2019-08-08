@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "#!/bin/bash"
+printf '#%.0s' {1..80}
+echo -e "\n# \n# "
+printf '#%.0s' {1..80}
