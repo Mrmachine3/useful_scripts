@@ -1,0 +1,20 @@
+#!/bin/bash
+
+date=$(date +%m-%d-%Y)
+time=$(date +%r)
+timestamp="$date at $time"
+
+wwf_out="~/wwf_output_$hostname_$time_$stamp.txt"
+
+# Create output file to log all WWF files on host system
+echo -e "Creating $wwf_out file in root directory..."
+echo $date
+echo $time
+echo $timestamp
+
+echo -e "WORLD WRITEABLE FILES ON $HOSTNAME" > $wwf_out
+echo -e "$@ executed on $TIMESTAMP\n" >> $wwf_out
+#
+## Find all wwf files beginning at root
+#echo -e "Finding all wwf files..."
+#find / -type f \( -perm -g+w -or -perm -o+w \) | xargs sudo ls -Al
