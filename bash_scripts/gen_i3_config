@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Define keymap config file
+KEYMAP_CONF="i3_keymap.conf"
+
+rm $KEYMAP_CONF
+echo "Creating $KEYMAP_CONF file template..."
+touch $KEYMAP_CONF
+sleep 1
+
+echo -e "# This is a script generated keymapping file\n" > $KEYMAP_CONF
+echo -e {"bindsym \$mod+","bindsym \$mod+\$Shift+","bindsym \$mod+\$Shift+\$other+"}{a..z}"\n" >> $KEYMAP_CONF
+echo -e {"bindsym \$mod+","bindsym \$mod+\$Shift+","bindsym \$mod+\$Shift+\$other+"}{0..9}"\n" >> $KEYMAP_CONF
+echo -e "$KEYMAP_CONF file complete..."
